@@ -170,6 +170,9 @@ class WeiBo:
         :param topic_dict: 超话信息字典,具体格式请看get_topic_list函数中
         :return:
         """
+        proxy = {
+            'http': '47.103.9.132:8888'
+        }
         check_data = {"c": "weicoabroad", "s": s, "wm": "2468_1001", "gsid": self.gsid,
                       "from": "1299295010", "source": "4215535043", "lang": "zh_CN",
                       'ua': "Redmi+K20+Pro+Premium+Edition_10_WeiboIntlAndroid_3610",
@@ -177,7 +180,7 @@ class WeiBo:
                       }
         if topic_dict["topic_status"] == "签到":
             time.sleep(random.randint(1, 2))
-            check_res = self.wrap_request('get', url=self.check_url, headers=self.get_headers(),
+            check_res = self.wrap_request('get',proxies=proxy, url=self.check_url, headers=self.get_headers(),
                                           params=check_data)
             # print(check_res.json())
             if check_res.json().get('errmsg'):
